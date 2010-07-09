@@ -127,8 +127,7 @@ module Padrino
         get :logout, :map => app.auth_logout_path do
           authorize!
           logout
-          env['x-rack.flash'][:success] = options.auth_success_message if defined?(Rack::Flash)
-          redirect options.auth_success_path
+          redirect options.auth_login_path
         end
       end
     end
