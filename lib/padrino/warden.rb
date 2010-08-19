@@ -120,29 +120,21 @@ module Padrino
 
         post :login, :map => app.auth_login_path, :provides => [:html, :json] do
           authenticate
-<<<<<<< HEAD
           env['x-rack.flash'][:success] = options.auth_success_message if defined?(Rack::Flash)
           case content_type
             when :html
+              flash[:notice] = options.auth_success_message if flash
               redirect options.auth_use_referrer && session[:return_to] ? session.delete(:return_to) :
                    options.auth_success_path
             when :json
               current_user.to_json(:only => [:email, :name])
           end
-=======
-          flash[:notice] = options.auth_success_message if flash
-          redirect options.auth_use_referrer && session[:return_to] ? session.delete(:return_to) : options.auth_success_path
->>>>>>> neaf
         end
 
         get :logout, :map => app.auth_logout_path do
           authorize!
           logout
-<<<<<<< HEAD
-          redirect options.auth_login_path
-=======
           redirect options.auth_success_path
->>>>>>> neaf
         end
       end
     end
