@@ -88,7 +88,7 @@ module Padrino
 
       app.use ::Warden::Manager do |manager|
           manager.default_strategies :password
-          manager.failure_app = options.auth_failure_app
+          manager.failure_app = app.auth_failure_app
       end
 
       app.controller :sessions do
