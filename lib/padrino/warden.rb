@@ -84,9 +84,11 @@ module Padrino
       # OAuth Specific Settings
       app.set :auth_use_oauth, false
 
+      app.set :auth_failure_app, app
+
       app.use ::Warden::Manager do |manager|
           manager.default_strategies :password
-          manager.failure_app = app
+          manager.failure_app = app.auth_failure_app
       end
 
       app.controller :sessions do
